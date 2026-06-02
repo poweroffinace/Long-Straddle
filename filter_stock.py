@@ -13,7 +13,7 @@ for item in data:
     marketCap = item.get('marketCap')
     
     row = [symbol, marketCap]
-    for day in range(MAX_DAYS+1):
+    for day in range(1, MAX_DAYS+1):
         mean = item.get('data').get(f'day_{day}').get('mean')
         std  = item.get('data').get(f'day_{day}').get('std')
         row.append(mean)
@@ -21,11 +21,11 @@ for item in data:
     df.append(row)
 
 columns = ['symbol', 'marketCap']
-for day in range(MAX_DAYS+1):
+for day in range(1, MAX_DAYS+1):
     columns.append(f'day_{day}')
     columns.append(f'day_{day}_min')
 df = pd.DataFrame(df, columns=columns)
 
-df.sort_values(by=['day_0_min', 'day_1_min', 'day_2_min', 'day_3_min', 'day_4_min', 'day_5_min'], ascending=False, inplace=True)
+df.sort_values(by=['day_1_min', 'day_2_min', 'day_3_min', 'day_4_min', 'day_5_min'], ascending=False, inplace=True)
 
 df.to_csv('displacement_df.csv', index=False)

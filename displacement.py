@@ -85,7 +85,7 @@ def get_displacement_dist(price_data_df):
     
     dist_values = {}
 
-    for day in range(0, MAX_DAYS+1):
+    for day in range(1, MAX_DAYS+1):
        dist_values[f"day_{day}"] = {
           'mean'    : float(round(price_data_df[f"D{day}"].mean(), 2)),
           'median'  : float(round(price_data_df[f"D{day}"].median(), 2)),
