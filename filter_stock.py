@@ -26,6 +26,6 @@ for day in range(MAX_DAYS+1):
     columns.append(f'day_{day}_min')
 df = pd.DataFrame(df, columns=columns)
 
-df.sort_values(by=['day_0', 'day_1', 'day_2', 'day_3', 'day_4', 'day_5'], ascending=False, inplace=True)
+df.sort_values(by=['day_0_min', 'day_1_min', 'day_2_min', 'day_3_min', 'day_4_min', 'day_5_min'], ascending=False, inplace=True)
 
 df.to_csv('displacement_df.csv', index=False)
