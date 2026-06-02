@@ -17,7 +17,7 @@ for item in data:
         mean = item.get('data').get(f'day_{day}').get('mean')
         std  = item.get('data').get(f'day_{day}').get('std')
         row.append(mean)
-        row.append(mean-std)
+        row.append(float(round(mean-std, 2)))
     df.append(row)
 
 columns = ['symbol', 'marketCap']
