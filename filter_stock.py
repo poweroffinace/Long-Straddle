@@ -28,4 +28,23 @@ df = pd.DataFrame(df, columns=columns)
 
 df.sort_values(by=['day_1_min', 'day_2_min', 'day_3_min', 'day_4_min', 'day_5_min'], ascending=False, inplace=True)
 
+
 df.to_csv('displacement_df.csv', index=False)
+
+from nselib import derivatives
+lot_size_res = None
+def get_lot_size(symbol):
+    global lot_size_res
+    if lot_size_res is None:
+      url = 'https://public.fyers.in/sym_details/NSE_FO.csv'
+      df = pd.read_csv(url, header=None)
+      lot_size_res = df
+      df_symbol = lot_size_res[lot_size_res[13] == symbol]
+      lot_sizes = df_symbol[(df_symbol[16] == 'CE') | (df_symbol[16] == 'PE')][3].unique()
+      return lot_sizes[0] if len(lot_sizes) > 0 else None
+    else:
+      df_symbol = lot_size_res[lot_size_res[13] == symbol]
+      lot_sizes = df_symbol[(df_symbol[16] == 'CE') | (df_symbol[16] == 'PE')][3].unique()
+      return lot_sizes[0] if len(lot_sizes) > 0 else None
+    
+df = derivatives.nse_live_option_chain(symbol=SYMBOL, expiry_date=EXPIRY)
