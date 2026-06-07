@@ -59,7 +59,7 @@ def get_data(year, symbol):
                 # BEFORE STARTING A NEW HOUR: Reload data.json
                 data = reload_json_data()
 
-                for minute in range(0, 60):
+                for minute in range(0, 60, 15):
                     if hour == 9 and minute < 15:
                         continue
                     if hour == 15 and minute > 30:
@@ -93,4 +93,16 @@ def get_data(year, symbol):
             print(f"--- Day {year}-{mm}-{dd} completed and saved to {filename} ---")
 
 
-get_data(2025, 1)
+get_data(2025, 191)
+
+
+# reliance        191
+# hdfcbank         95
+# bhartiaritel     44
+# icicibank       105
+# sbin            195
+# tcs             213
+# bajajfin         35
+# lt              141
+# hul             103
+# infy            118
